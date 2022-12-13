@@ -84,7 +84,7 @@ function App() {
         <Toolbar />
         <Box className={classes.body}>
           {/*<RiggingSite />*/}
-          <RiggingSite />
+          <TrainingList />
         </Box>
       </Box>
     </ThemeProvider>
