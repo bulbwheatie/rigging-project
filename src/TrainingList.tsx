@@ -1,5 +1,5 @@
 import React from 'react'
-import { getMatchingSites } from './data'
+import { RIGGING_SITES, getMatchingSites, RiggingScene } from './data'
 import Paper from '@mui/material/Paper'
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
@@ -12,7 +12,10 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Chip from '@mui/material/Chip';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
+
 import { observer } from 'mobx-react';
 import { makeObservable, observable, action, computed } from 'mobx';
 
@@ -43,7 +46,7 @@ class TrainingSearchStore {
 	}
 
 	@computed
-	get sites() {
+	get sites(): Record<number, RiggingScene[]> {
 		return getMatchingSites({
 			searchTerm: this.searchTerm,
 			type: this.type,
@@ -66,42 +69,40 @@ const _TrainingList = observer(({store}) => {
 			<ObjectivesMenuSelector store={store} />
 		</Box>
 		<Box>
-			<div>{store.type}</div>
-			<div>{store.searchTerm}</div>
-			<div>{JSON.stringify(store.objectives)}</div>
-			<pre>{JSON.stringify(store.sites, null, 2)}</pre>
+			<ListOfSites store={store} />
 		</Box>
 	</div>);
 });
 
 
-function ListOfSites() {
-	const matchingSite = {
-		title:'practice rock',
-
-	}
+const ListOfSites = observer(({store}) => {
 	return(<div>
-		Matching sites
-
-	</div>)
-}
-
-interface SiteMatch {
-	title: string;
-	scenes: {
-		title: string;
-		objectiveTags: string[];
-	}[];
-}
-
-function MatchingSite({ siteMatch }: {siteMatch: SiteMatch}) {
-	return(<div>
-		{siteMatch.title}
-		{siteMatch.scenes.map((scene)=>{
-			return(<div>{scene.title}</div>)
+		{Object.entries(store.sites).map((site) => {
+			const scenes = site[1] as RiggingScene[];
+			const siteId = site[0];
+			return (<MatchingSite scenes={scenes} siteId={parseInt(siteId)} tags={store.objectives} />)
 		})}
-	</div>);
-}
+	</div>)
+});
+
+const MatchingSite = (({ scenes, siteId, tags} : {scenes: RiggingScene[], siteId: number, tags: string[]}) =>  {
+	const siteMatch = RIGGING_SITES[siteId -1]; // TODO: fix this indexing
+	return(<Box sx={{p: '8px'}}>
+		<Typography variant='body1'>{siteMatch.name}</Typography>
+		<Box sx={{p: '4px 12px'}}>
+			{scenes.map((scene)=>{
+				return(<Box sx={{pt: '4px'}}>
+					<Typography variant='body2' component="span">{scene.name}</Typography>
+					<Box sx={{pl: '4px'}} component="span">
+					{scene.trainingObjectives.map((tag) => {
+						return (<Chip sx={{ml: '4px'}} color={tags.includes(tag) ? 'primary' : 'default'} label={tag} size="small"/>);
+					})}
+					</Box>
+				</Box>)
+			})}
+		</Box>
+	</Box>);
+});
 
 const SearchBar = observer(({store}) => {
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -146,7 +147,7 @@ const TypeMenuSelector = observer(({store}) => {
 });
 
 
-const AVAILABLE_TAGS = ['hard edge', 'vertical litter', 'sloping edge', 'novice', 'overhang'];
+const AVAILABLE_TAGS = ['hard edge', 'vertical litter', 'rounded edge', 'novice', 'overhang'];
 const ObjectivesMenuSelector = observer(({store}) => {
 	const handleChange = (_event, value) => {
 		store.setObjectives(value);
