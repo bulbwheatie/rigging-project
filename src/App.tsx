@@ -15,6 +15,7 @@ import {
   Routes,
   Route,
   BrowserRouter,
+  HashRouter,
 } from "react-router-dom";
 import Link from '@mui/material/Link';
 
@@ -90,12 +91,12 @@ function App() {
 
         <Toolbar />
         <Box className={classes.body}>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
                 <Route path="/" element={<TrainingList />} />
                 <Route path="/site/:siteId" element={<RiggingSitePage />} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </Box>
       </Box>
     </ThemeProvider>

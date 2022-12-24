@@ -1,5 +1,7 @@
 import { RiggingScene } from './types';
 
+const PLACEHOLDER_TEXT =  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
 export const AREAS = [{
 	id: 1,
 	name: 'Little Si'
@@ -12,22 +14,22 @@ export const RIGGING_SITES = [{
 	id: 1,
 	areaId: 1,
 	name: 'Practice Rock',
-	approach: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	approach: PLACEHOLDER_TEXT,
+	description: PLACEHOLDER_TEXT,
 	hazards: null,
 }, {
 	id: 2,
 	areaId: 2,
 	name: 'Sloping Edge',
-	approach: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	approach: PLACEHOLDER_TEXT,
+	description: PLACEHOLDER_TEXT,
 	hazards: null,
 }, {
 	id: 3,
 	areaId: 2,
 	name: 'Twig of Fate',
-	approach: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	approach: PLACEHOLDER_TEXT,
+	description: PLACEHOLDER_TEXT,
 	hazards: null,
 }];
 
@@ -35,49 +37,49 @@ export const RIGGING_SCENES = [{
 	id: 1,
 	siteId: 1,
 	name: "Scene #1",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["novice"],
 	type: "HIGH"
 }, {
 	id: 2,
 	siteId: 1,
 	name: "Scene #2",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["rounded edge", "pick-off", "novice"],
 	type: "HIGH"
 }, {
 	id: 3,
 	siteId: 1,
 	name: "Scene #3",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["novice", "overhang"],
 	type: "HIGH"
 }, {
 	id: 4,
 	siteId: 2,
 	name: "Scene #1",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["hard edge", "overhang"],
 	type: "STEEP"
 }, {
 	id: 5,
 	siteId: 2,
 	name: "Scene #2",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["litter", "hard edge"],
 	type: "HIGH"
 }, {
 	id: 6,
 	siteId: 3,
 	name: "Scene #1",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["back tie"],
 	type: "HIGH"
 }, {
 	id: 7,
 	siteId: 3,
 	name: "Scene #1",
-	description: "",
+	description: PLACEHOLDER_TEXT,
 	trainingObjectives: ["vertical litter", "hard edge", "overhang"],
 	type: "HIGH"
 }];

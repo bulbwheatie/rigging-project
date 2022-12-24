@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 
 import { observer } from 'mobx-react';
 import { makeObservable, observable, action, computed } from 'mobx';
@@ -90,7 +90,7 @@ const ListOfSites = observer(({store}) => {
 const MatchingSite = (({ scenes, siteId, tags} : {scenes: RiggingScene[], siteId: number, tags: string[]}) =>  {
 	const siteMatch = RIGGING_SITES[siteId -1]; // TODO: fix this indexing
 	return(<Box sx={{p: '8px'}}>
-		<Link href={`/site/${siteMatch.id}`}><Typography variant='body1'>{siteMatch.name}</Typography></Link>
+		<Link to={`/site/${siteMatch.id}`}><Typography variant='body1'>{siteMatch.name}</Typography></Link>
 		<Box sx={{p: '4px 12px'}}>
 			{scenes.map((scene, i)=>{
 				return(<Box sx={{pt: '4px'}} key={i}>
