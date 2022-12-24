@@ -11,6 +11,12 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
+import Link from '@mui/material/Link';
 
 import { RIGGING_SITES } from './data';
 
@@ -18,8 +24,9 @@ import { RIGGING_SITES } from './data';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Chip from '@mui/material/Chip';
 
-import RiggingSite from './RiggingSite';
+import RiggingSitePage from './RiggingSitePage';
 import TrainingList from './TrainingList';
+
 
 const theme = createTheme({
   typography: {
@@ -75,16 +82,20 @@ function App() {
 
         <AppBar position="fixed">
           <Toolbar>
-            <div className={classes.navBar}>
+            <Link href="/" className={classes.navBar} underline='none' color="white">
               Rigging Project
-            </div>
+            </Link>
           </Toolbar>
         </AppBar>
 
         <Toolbar />
         <Box className={classes.body}>
-          {/*<RiggingSite />*/}
-          <TrainingList />
+          <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<TrainingList />} />
+                <Route path="/site/:siteId" element={<RiggingSitePage />} />
+            </Routes>
+          </BrowserRouter>
         </Box>
       </Box>
     </ThemeProvider>

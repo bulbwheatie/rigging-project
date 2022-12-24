@@ -1,5 +1,6 @@
 import React from 'react'
-import { RIGGING_SITES, getMatchingSites, RiggingScene } from './data'
+import { RIGGING_SITES, getMatchingSites } from './data';
+import { RiggingScene } from './types';
 import Paper from '@mui/material/Paper'
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 
 import { observer } from 'mobx-react';
 import { makeObservable, observable, action, computed } from 'mobx';
@@ -77,10 +79,10 @@ const _TrainingList = observer(({store}) => {
 
 const ListOfSites = observer(({store}) => {
 	return(<div>
-		{Object.entries(store.sites).map((site) => {
+		{Object.entries(store.sites).map((site, i) => {
 			const scenes = site[1] as RiggingScene[];
 			const siteId = site[0];
-			return (<MatchingSite scenes={scenes} siteId={parseInt(siteId)} tags={store.objectives} />)
+			return (<MatchingSite key={i} scenes={scenes} siteId={parseInt(siteId)} tags={store.objectives} />)
 		})}
 	</div>)
 });
@@ -88,14 +90,14 @@ const ListOfSites = observer(({store}) => {
 const MatchingSite = (({ scenes, siteId, tags} : {scenes: RiggingScene[], siteId: number, tags: string[]}) =>  {
 	const siteMatch = RIGGING_SITES[siteId -1]; // TODO: fix this indexing
 	return(<Box sx={{p: '8px'}}>
-		<Typography variant='body1'>{siteMatch.name}</Typography>
+		<Link href={`/site/${siteMatch.id}`}><Typography variant='body1'>{siteMatch.name}</Typography></Link>
 		<Box sx={{p: '4px 12px'}}>
-			{scenes.map((scene)=>{
-				return(<Box sx={{pt: '4px'}}>
+			{scenes.map((scene, i)=>{
+				return(<Box sx={{pt: '4px'}} key={i}>
 					<Typography variant='body2' component="span">{scene.name}</Typography>
 					<Box sx={{pl: '4px'}} component="span">
-					{scene.trainingObjectives.map((tag) => {
-						return (<Chip sx={{ml: '4px'}} color={tags.includes(tag) ? 'primary' : 'default'} label={tag} size="small"/>);
+					{scene.trainingObjectives.map((tag, i) => {
+						return (<Chip key={i} sx={{ml: '4px'}} color={tags.includes(tag) ? 'primary' : 'default'} label={tag} size="small"/>);
 					})}
 					</Box>
 				</Box>)
